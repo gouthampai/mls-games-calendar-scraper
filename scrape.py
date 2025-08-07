@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from selenium import webdriver
 from bs4 import BeautifulSoup
-from datetime import date
+from datetime import date, timedelta
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -19,10 +19,11 @@ fireFoxOptions= Options()
 fireFoxOptions.add_argument("--headless")
 
 today = date.today()
+next_week = today + timedelta(days=7)
 
 # Launch website--la galaxy site didn't work but mls does?
-driver.get("https://www.mlssoccer.com/schedule/#competition=all&club=MLS-CLU-00000G") #&date=" + str(today))
-
+link = "https://www.mlssoccer.com/schedule/#competition=all&club=MLS-CLU-00000G&date=" + str(today)
+driver.get(link)
 time.sleep(15)
 div_element = WebDriverWait(driver, 15).until(
     EC.presence_of_element_located((By.CLASS_NAME, "mls-c-schedule__matches"))
