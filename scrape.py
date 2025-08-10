@@ -14,9 +14,9 @@ import re
 
 # Use requests and webdriver to get the MLS site
 # Creating new driver for Firefox
-driver = webdriver.Firefox()
 fireFoxOptions= Options()
 fireFoxOptions.add_argument("--headless")
+driver = webdriver.Firefox(fireFoxOptions)
 
 today = date.today()
 next_week = today + timedelta(days=7)
@@ -37,15 +37,15 @@ inner_html = div_element.get_attribute('innerHTML')
 soup = BeautifulSoup(inner_html, "html.parser")
 
 # get the game info for this week !!!
-date_div = soup.findAll('div', class_='sc-iJnaPW gtujJv mls-c-status-stamp__status -pre')
+date_div = soup.find_all('div', class_='sc-iJnaPW gtujJv mls-c-status-stamp__status -pre')
 
-cup_div = soup.findAll('div', class_='sc-eDvSVe jOWTAi mls-c-explainer-bar')
+cup_div = soup.find_all('div', class_='sc-eDvSVe jOWTAi mls-c-explainer-bar')
 
-team_span = soup.findAll('span', class_='mls-c-club__shortname')
+team_span = soup.find_all('span', class_='mls-c-club__shortname')
 
-time_div = soup.findAll('div', class_ = 'sc-jSUZER dhPUPP mls-c-scorebug mls-c-scorebug--horizontal')
+time_div = soup.find_all('div', class_ = 'sc-jSUZER dhPUPP mls-c-scorebug mls-c-scorebug--horizontal')
 
-location_div = soup.findAll('p', class_ = 'sc-iveFHk fMBbsK')
+location_div = soup.find_all('p', class_ = 'sc-iveFHk fMBbsK')
 
 print("done collecting data")
 
